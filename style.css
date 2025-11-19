@@ -228,6 +228,27 @@ body {
   gap: 2rem;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* Below sidebar, above content */
+
+  /* Hide it by default */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* --- State when sidebar is open --- */
+body.sidebar-open .overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
 .main-content {
   grid-area: main;
   overflow-y: auto;
@@ -351,6 +372,10 @@ body {
   align-items: center;
   gap: 0.5rem;
   align-self: stretch;
+}
+
+.sidebar .logout_icon {
+  display: none;
 }
 
 .sidebar .menu a {
@@ -1092,7 +1117,70 @@ input[type="checkbox"] {
   }
 
   .sidebar {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    gap: 1rem;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    grid-area: unset;
+    width: 80vw;
+    max-width: var(--sidebar-width);
+  }
+
+  body.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+
+  .top_sidebar {
+    display: flex;
+    padding: 0;
+  }
+
+  .middle_sidebar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.25rem;
+    gap: 1rem;
+    align-self: stretch;
+    flex-grow: 0;
+    overflow-y: hidden;
+  }
+
+  .general .heading h2,
+  .tool h2 {
+    color: var(--Neutral-500, #727272);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  .bottom_sidebar {
+    margin-top: 1rem;
+  }
+
+  .sidebar .logout_icon {
+    cursor: pointer;
+    display: block;
+  }
+
+  .company_name p {
+    color: var(--Neutral-300, #b0b0b0);
+    font-size: 0.65rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  .logo_wrapper {
+    width: 100px;
+    height: auto;
   }
 
   .mobile-nav {
@@ -1309,6 +1397,10 @@ input[type="checkbox"] {
   }
   .main-content .top_section .page_header {
     font-size: 0.9rem;
+  }
+
+  body.sidebar-open {
+    overflow: hidden;
   }
 
   .main-content .top_section .page_nav {
