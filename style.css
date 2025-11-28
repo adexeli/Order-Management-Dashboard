@@ -1050,6 +1050,7 @@ input[type="checkbox"] {
 
 .cell-toggle {
   display: none;
+  cursor: pointer;
 }
 .order-card-details {
   display: none;
